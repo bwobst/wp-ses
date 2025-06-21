@@ -1,16 +1,11 @@
 {
-  "name": "standingroomonly-group/wp-ses",
+  "name": "rkaiser0324/wp-ses",
   "type": "wordpress-plugin",
-  "homepage": "https://gitlab.com/standingroomonly-group/wp-ses",
-  "license": "MIT",
-  "description": "A WordPress plugin to send emails via Amazon SES",
-  "authors": [],
-  "keywords": [
-    "wordpress"
-  ],
-  "support": {},
+  "homepage": "https://github.com/rkaiser0324/wordpress-wp-ses",
+  "license": "GPLv3",
+  "description": "Modified version of WP-SES plugin from https://github.com/wp-plugins/wp-ses, ready for composer.",
+  "keywords": [],
   "require": {
-    "php": ">=7.0.0",
-    "aws/aws-sdk-php": "^3.0"
+    "composer/installers": "*"
   }
 }
