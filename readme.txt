@@ -12,7 +12,7 @@ Send all outgoing WordPress emails through Amazon Simple Email Service (SES) for
 
 == Description ==
 
-WP SES overrides the local wp_mail() function to send outgoing WordPress emails through Amazon Simple Email Service (SES), which 
+WP SES overrides the local wp_mail() function to send outgoing WordPress emails through Amazon Simple Email Service (SES), which
 ensures high email deliverability, email traffic statistics, and a powerful managed infrastructure.
 
 Features:
@@ -22,7 +22,7 @@ Features:
 * Validation of Amazon API Credentials
 * Custom Reply-To or from Headers
 * HTML template support, either inline or via an external file
-* SES Endpoint selection     
+* SES Endpoint selection
 * Attachment support, compatible with [Contact Form 7](https://contactform7.com/)
 * Logging, to aid in debugging
 
@@ -49,20 +49,20 @@ You can alternatively set the following configurations via defines in wp-config.
 // AWS Access Key
 define('WP_SES_ACCESS_KEY', 'blablablakey');
 
-// AWS Secret Key  
+// AWS Secret Key
 define('WP_SES_SECRET_KEY', 'blablablasecret');
 
 // AWS Endpoint
-define('WP_SES_ENDPOINT', 'email.us-east-1.amazonaws.com');  
+define('WP_SES_ENDPOINT', 'email.us-east-1.amazonaws.com');
 
 // From address
 define('WP_SES_FROM', 'myaddress@domain.com');
 
-// Return path for bounced emails 
+// Return path for bounced emails
 define('WP_SES_RETURNPATH', 'returnaddress@domain.com');
 
-// ReplyTo - This will get the replies from the recipients.  
-// Set to an address, or 'headers' for using the 'replyto' from the headers.   
+// ReplyTo - This will get the replies from the recipients.
+// Set to an address, or 'headers' for using the 'replyto' from the headers.
 define('WP_SES_REPLYTO', 'headers');
 
 // Hide list of verified emails
@@ -71,7 +71,7 @@ define('WP_SES_HIDE_VERIFIED', true);
 // Auto activate the plugin for all sites
 define('WP_SES_AUTOACTIVATE', true);
 
-// Send every email to a defined recipient, useful for debugging.  
+// Send every email to a defined recipient, useful for debugging.
 // This overrides any wp_mail filters and displays a warning message in the body of the email.
 define('WP_SES_RECIPIENT_EMAIL', 'myaddress@domain.com');
 `
@@ -140,7 +140,7 @@ Updates after 0.3.58 are tracked in the repository.
 * Various bugfixes
 
 = 0.2.2 =
-Reference Language is now English.  
+Reference Language is now English.
 WP SES est fourni avec les textes en Francais.
 
 = 0.2.1 =

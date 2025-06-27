@@ -3,7 +3,7 @@
 /*
   Plugin Name: WP SES
   Version: 1.1.0
-  Plugin URI: https://github.com/rkaiser0324/wp-ses
+  Plugin URI: https://github.com/bwobst/wp-ses
   Description: Uses Amazon SES for all outgoing WordPress emails.  Forked from SylvainDeaure's WP SES.
   Author: DigiPowers, Inc.
   Author URI: https://www.digipowers.com
@@ -33,7 +33,7 @@ class WpSes
             }
 
             self::$_predefinedAwsKeys = defined('WP_SES_ACCESS_KEY') && defined('WP_SES_SECRET_KEY');
-        
+
             self::_getOptions();
 
             if (is_admin()) {
@@ -55,7 +55,7 @@ class WpSes
                 $func = new ReflectionFunction('wp_mail');
                 throw new exception(sprintf("The <code>wp_mail()</code> function is being overridden in <code>%s</code>. You'll need to remove that before WP SES can be enabled.", $func->getFileName()));
             }
-            
+
             add_filter('wp_mail_from_name', function ($name) {
                 if (!empty(self::$_options['from_name'])) {
                     $name = self::$_options['from_name'];
@@ -198,8 +198,8 @@ class WpSes
                 'log' => 0,
                 'active' => 1, // reset to 0 if not pluggable or config change.
                 'version' => '0' // Version of the db
-                    // TODO: garder liste des ids des demandes associ�es � chaque email.
-                    // afficher : email, id demande , valid� ?
+                    // TODO: garder liste des ids des demandes associées à chaque email.
+                    // afficher : email, id demande , validé ?
             ));
                 self::_getOptions();
             }
@@ -219,7 +219,7 @@ class WpSes
             }
             wp_die();
         }
-        
+
         add_action('wp_ajax_wpses_stats', function () {
             // TODO: add 15 min cache to stats
             // TODO: add chart
@@ -230,20 +230,20 @@ class WpSes
                 set_error_handler(function ($errno, $errstr, $errfile, $errline) {
                     throw new exception($errstr);
                 });
-    
+
                 if (self::$_options['credentials_ok'] != 1) {
                     throw new exception('Amazon API credentials have not been checked.');
                 }
-    
+
                 $quota = self::$_SES->getSendQuota();
-            
+
                 $quota['SendRemaining'] = $quota['Max24HourSend'] - $quota['SentLast24Hours'];
                 if ($quota['Max24HourSend'] > 0) {
                     $quota['SendUsage'] = round($quota['SentLast24Hours'] * 100 / $quota['Max24HourSend']);
                 } else {
                     $quota['SendUsage'] = 0;
                 }
-    
+
                 $stats = self::$_SES->getSendStatistics();
                 usort($stats['SendDataPoints'], function ($a, $b) {
                     if ($a['Timestamp'] < $b['Timestamp']) {
@@ -260,7 +260,7 @@ class WpSes
             wp_die(); // this is required to terminate immediately and return a proper response
         });
     }
- 
+
     public static function optionsPage()
     {
         try {
@@ -440,7 +440,7 @@ class WpSes
                     empty($_POST['prod_email_attachment']) ? '' : $_POST['prod_email_attachment']
                 );
             }
-                   
+
             if (self::$_options['active'] != 1) {
                 throw new exception('WP SES is not enabled.');
             }
@@ -490,7 +490,7 @@ class WpSes
     {
         // dans la chaine : Sender - InvalidClientTokenId  si auth pas correct
         // Sender - OptInRequired
-        // The AWS Access Key Id needs a subscription for the service: si cl� aws ok, mais pas d'abo au service amazon lors de la verif d'un mail
+        // The AWS Access Key Id needs a subscription for the service: si clé aws ok, mais pas d'abo au service amazon lors de la verif d'un mail
         // inscription depuis aws , verif phone.
 
         $rid = self::$_SES->verifyEmailAddress($mail);
@@ -556,7 +556,7 @@ class WpSes
         /**
          * Note that the To, CC, and Bcc fields only support comma-separated expressions, e.g.,
          *  CC: user1@domain.com,user2@domain.com,...
-         * 
+         *
          * Semicolons are not supported.
          */
         if (preg_match_all('/^CC: (.+)$/imsU', $headers, $address)) {
@@ -598,7 +598,7 @@ class WpSes
                 }
             }
         }
-         
+
         // what to do if more than 50 ? (SES limit)
         if (preg_match('/,/im', $to)) {
             $to = explode(',', $to);

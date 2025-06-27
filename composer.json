@@ -1,7 +1,7 @@
 {
   "name": "bwobst/wp-ses",
   "type": "wordpress-plugin",
-  "homepage": "https://github.com/rkaiser0324/wordpress-wp-ses",
+  "homepage": "https://github.com/bwobst/wp-ses",
   "license": "GPLv3",
   "description": "Modified version of WP-SES plugin from https://github.com/wp-plugins/wp-ses, ready for composer.",
   "keywords": [],
