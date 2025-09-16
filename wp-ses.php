@@ -213,10 +213,7 @@ class WpSes
         });
 
         if (!empty($_GET['wpses_viewlogs'])) {
-            $path = dirname(ini_get('error_log')) . "/wpses.log";
-            if (file_exists($path)) {
-                echo nl2br(file_get_contents($path));
-            }
+            // In containerized environments, logs go to stderr, not files
             wp_die();
         }
 
@@ -479,10 +476,7 @@ class WpSes
 
     private static function _log($message)
     {
-        if (self::$_options['log']) {
-            $path = dirname(ini_get('error_log')) . "/wpses.log";
-            error_log(time() . "\t" . $message . "\r\n", 3, $path);
-        }
+        error_log('[WP-SES] ' . $message);
     }
 
     // start email verification (mail from amazon to sender, requesting validation)
